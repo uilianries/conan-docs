@@ -403,7 +403,7 @@ recipe's repository.
             self.version = "%s_%s" % (git.get_branch(), git.get_revision())
 
 The ``set_name()`` and ``set_version()`` methods should respectively set the ``self.name`` and ``self.version`` attributes.
-These methods are only executed when the recipe is in a user folder (:command:`export`, :command:`create` and 
+These methods are only executed when the recipe is in a user folder (:command:`export`, :command:`create` and
 :command:`install <path>` commands).
 
 The above example uses the current working directory as the one to resolve the relative "name.txt" path and the git repository.
@@ -1042,3 +1042,52 @@ The ``deploy()`` method is designed to work on a package that is installed direc
 
 All other packages and dependencies, even transitive dependencies of "Pkg/0.1@user/testing" will not be deployed, it is the responsibility
 of the installed package to deploy what it needs from its dependencies.
+
+
+.. _method_test:
+
+test()
+------
+
+This method can be used in a *test_package/conanfile.py* to verify the created package.
+
+..  code-block:: python
+
+    def test(self):
+        bin_path = os.path.join("bin", "example") # bin/example is an app built by the test_package
+        self.run(bin_path, run_environment=True)  # the exit code will be checked. Any value != 0 is an error
+
+The method ``test()`` is executed automatically when Conan runs the test step.
+Also, it can used to verify if some specific files are packaged correctly:
+
+..  code-block:: python
+
+    def test(self):
+        # license file has been copied with success
+        license_file = os.path.join(self.deps_cpp_info["example"].rootpath, "licenses", "LICENSE")
+        assert os.path.is_file(license_file)
+
+        # configuration file has been copied with success
+        config_file = os.path.join(self.deps_cpp_info["example"].res_paths[0], "foo.conf")
+        assert os.path.is_file(config_file)
+
+        # validate example exit code
+        bin_path = os.path.join("bin", "example")
+        self.run(bin_path, run_environment=True)
+
+        # example must generated result.xml file
+        assert os.path.is_file("result.xml")
+
+There are more than one way to verify if a package is fine, for instance, when building installers, we just need to check the command output:
+
+..  code-block:: python
+
+    def test(self):
+        from six import StringIO
+        output = StringIO()
+
+        # validate cmake output. cmake is part of the package cmake/3.16.3
+        self.run("cmake --version", output=output, run_environment=True)
+        value = str(output.getvalue())
+        cmake_version = value.split('\n')[0]
+        assert "3.16.3" in cmake_version
