@@ -24,6 +24,8 @@ An MD5 hash calculator using the Poco Libraries
 
         $ git clone https://github.com/conan-io/examples.git && cd examples/libraries/poco/md5
 
+.. _getting_started_step_1:
+
 1. Create the following source file inside a folder. This will be the source file of our application:
 
     .. code-block:: cpp
@@ -45,6 +47,8 @@ An MD5 hash calculator using the Poco Libraries
             return 0;
         }
 
+.. _getting_started_step_2:
+
 2. We know that our application relies on the Poco libraries. Let's look for it in the Conan Center remote:
 
     .. code-block:: bash
@@ -57,6 +61,8 @@ An MD5 hash calculator using the Poco Libraries
         poco/1.9.4
 
     Conan remotes must be specified in search. It will otherwise only search local cache.
+
+.. _getting_started_step_3:
 
 3. We got some interesting references for Poco. Let's inspect the metadata of the 1.9.4 version:
 
@@ -92,6 +98,8 @@ An MD5 hash calculator using the Poco Libraries
             enable_crypto: True
             [...]
 
+.. _getting_started_step_4:
+
 4. Ok, it looks like this dependency could work with our hash calculator app. We should indicate which are
    the requirements and the generator for our build system. Let's create a *conanfile.txt* inside our
    project's folder with the following content:
@@ -109,6 +117,8 @@ An MD5 hash calculator using the Poco Libraries
     specified. This generator creates a *conanbuildinfo.cmake* file that defines CMake variables
     including paths and library names that can be used in our build. Read more about
     :ref:`generators_reference`.
+
+.. _getting_started_step_5:
 
 5. Next step: We are going to install the required dependencies and generate the information for the build system:
 
@@ -168,6 +178,8 @@ An MD5 hash calculator using the Poco Libraries
     Conan installed our Poco dependency but also the **transitive dependencies** for it: OpenSSL and zlib. It has also generated a
     *conanbuildinfo.cmake* file for our build system.
 
+.. _getting_started_step_6:
+
 6. Now let's create our build file. To inject the Conan information, include the generated *conanbuildinfo.cmake* file like this:
 
     .. code-block:: cmake
@@ -183,6 +195,8 @@ An MD5 hash calculator using the Poco Libraries
 
         add_executable(md5 md5.cpp)
         target_link_libraries(md5 ${CONAN_LIBS})
+
+.. _getting_started_step_7:
 
 7. Now we are ready to build and run our Encrypter app:
 
@@ -345,6 +359,8 @@ Or generate a graph of your dependencies using Dot or HTML formats:
     :height: 310 px
     :width: 200 px
     :align: center
+
+.. _getting_started_searching_packages:
 
 Searching Packages
 ------------------
