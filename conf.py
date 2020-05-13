@@ -36,6 +36,7 @@ extensions = [
     'sphinx.ext.todo',
     'conan',
     'sphinxcontrib.spelling',
+    'notfound.extension',
 ]
 
 # The short X.Y version.
@@ -449,7 +450,7 @@ def copy_legacy_redirects(app, docname): # Sphinx expects two arguments
 </head>
 </html>
 """
- 
+
     if app.builder.name == 'html':
         for html_src_path, dst_path in redirect_files.items():
             target_path = app.outdir + '/' + html_src_path
