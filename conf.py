@@ -36,7 +36,7 @@ extensions = [
     'sphinx.ext.todo',
     'conan',
     'sphinxcontrib.spelling',
-    'notfound.extension',
+#    'notfound.extension',
 ]
 
 # The short X.Y version.
@@ -70,7 +70,7 @@ html_context = {
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
-notfound_template = 'layout.html'
+# notfound_template = 'layout.html'
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
