@@ -393,10 +393,6 @@ linkcheck_workers = 15
 linkcheck_timeout = 90
 linkcheck_retries = 2
 
-# Not Found
-notfound_pagename = 'Page Not Found'
-
-
 # copy legacy redirects
 def copy_legacy_redirects(app, docname): # Sphinx expects two arguments
     # FILL in this dicts the necessary redirects
