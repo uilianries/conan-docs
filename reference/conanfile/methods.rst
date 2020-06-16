@@ -394,7 +394,7 @@ Dynamically define ``name`` and ``version`` attributes in the recipe with these 
 defines the package name reading it from a *name.txt* file and the version from the branch and commit of the
 recipe's repository.
 
-These functions are executed after assigning the values of the ``name`` and ``version`` if they are provided 
+These functions are executed after assigning the values of the ``name`` and ``version`` if they are provided
 from the command line.
 
 ..  code-block:: python
@@ -648,7 +648,7 @@ Methods:
     - **update()**: Updates the system package manager database. It's called automatically from the ``install()`` method by default.
     - **install(packages, update=True, force=False)**: Installs the ``packages`` (could be a list or a string). If ``update`` is True it
       will execute ``update()`` first if it's needed. The packages won't be installed if they are already installed at least of ``force``
-      parameter is set to True. If ``packages`` is a list the first available package will be picked (short-circuit like logical **or**).
+      parameter is set to True.
       **Note**: This list of packages is intended for providing **alternative** names for the same package, to account for small variations
       of the name for the same package in different distros. To install different packages, one call to ``install()`` per package is necessary.
     - **installed(package_name)**: Verify if ``package_name`` is actually installed. It returns ``True`` if it is installed, otherwise ``False``.
@@ -736,7 +736,7 @@ Parameters:
     - **dst** (Optional, Defaulted to ``""``): Destination local folder, with reference to current directory, to which the files will be
       copied.
     - **src** (Optional, Defaulted to ``""``): Source folder in which those files will be searched. This folder will be stripped from the
-      dst parameter. E.g., `lib/Debug/x86`. It accepts symbolic folder names like ``@bindirs`` and ``@libdirs`` which will map to the 
+      dst parameter. E.g., `lib/Debug/x86`. It accepts symbolic folder names like ``@bindirs`` and ``@libdirs`` which will map to the
       ``self.cpp_info.bindirs`` and ``self.cpp_info.libdirs`` of the source package, instead of a hardcoded name.
     - **root_package** (Optional, Defaulted to *all packages in deps*): An fnmatch pattern of the package name ("OpenCV", "Boost") from
       which files will be copied.
@@ -1139,7 +1139,7 @@ The current folder (``os.getcwd()``) and the ``self.export_folder`` can be used 
     import os
     from conans import ConanFile
     from conans.tools import save, load
-    
+
     class Pkg(ConanFile):
 
         def export(self):
